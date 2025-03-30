@@ -3,7 +3,7 @@ import React from 'react'
 const versusbar = ({totalMoney, moneyMade}: {totalMoney: number,moneyMade: number}) => {
     const percentage = (moneyMade / totalMoney) * 100;
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="w-full">
       <input
       type="range"
       min="0"

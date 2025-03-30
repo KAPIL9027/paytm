@@ -70,12 +70,16 @@ const Dashboard = async () => {
         }
       }
     });
-    return p2pTransactions.filter((txn)=> txn.amount > 0)
+    return p2pTransactions.filter((txn:  {
+      amount: number;
+      timestamp: Date;
+      ToUser: {
+          number: string;
+      };
+  })=> txn.amount > 0)
   }
   let transactions = await getTransfers();
   let p2pTransactions = await getP2PTransactions();
-  console.log(p2pTransactions);
-  console.log(transactions);
   let userTransactions = transactions
     ? [...transactions?.receivedTransfers, ...transactions?.sentTransfers]?.map(
         (txn) => {
@@ -89,7 +93,7 @@ const Dashboard = async () => {
       )
     : [];
   let onRampTransactions =
-    transactions?.OnRampTransaction.map((txn) => {
+    transactions?.OnRampTransaction.map((txn:any) => {
       return {
         amount: txn.amount,
         time: txn.startTime,
@@ -98,8 +102,8 @@ const Dashboard = async () => {
       };
     }) ?? [];
   let overallTransactions = [...userTransactions, ...onRampTransactions];
-  const totalMoney = overallTransactions.reduce((partialSum,txn)=> partialSum + txn.amount,0)
-  const moneyMade = overallTransactions.filter((txn)=> txn.type === "Received").reduce((partialSum,txn)=> partialSum + txn.amount,0);
+  const totalMoney = overallTransactions.reduce((partialSum:number,txn:any)=> partialSum + txn.amount,0)
+  const moneyMade = overallTransactions.filter((txn:any)=> txn.type === "Received").reduce((partialSum:number,txn:any)=> partialSum + txn.amount,0);
   const balance: number | undefined = await getBalance();
 
   return (
