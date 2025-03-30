@@ -26,7 +26,7 @@ async function getOnRampTransactions() {
       userId: Number(session?.user?.id),
     },
   });
-  return transactions.map((t) => ({
+  return transactions.map((t:any) => ({
     time: t.startTime,
     amount: t.amount,
     status: t.status,
