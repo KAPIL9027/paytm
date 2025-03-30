@@ -1,0 +1,9 @@
+
+import {useSetRecoilState} from 'recoil'
+import { openModalAtom } from '../atoms/openModal'
+const useSetOpenModal = () => {
+    const setValue = useSetRecoilState(openModalAtom);
+    return setValue;
+}
+
+export default useSetOpenModal

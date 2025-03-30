@@ -3,9 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./styles.css": "./src/styles.css",
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./code": "./src/code.tsx",
+    "./providers": "./src/providers.tsx",
+    "./appbar": "./src/appbar.tsx",
+    "./center": "./src/Center.tsx",
+    "./select": "./src/Select.tsx",
+    "./textinput": "./src/textinput.tsx",
+    "./skeletoncard": "./src/skeletoncard.tsx",
+    "./toast": "./src/toast.tsx",
+    "./versusbar": "./src/versusbar.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -23,7 +32,10 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.0.8",
+    "postcss": "^8.5.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.8"
   }
 }
