@@ -17,14 +17,13 @@ export async function p2pTransfer(to: string,amount: number){
             number: to
         }
     });
-    console.log(toUser);
     if(!toUser?.number) {
         return {
             message: "User not found"
         }
     }
 
-    await db.$transaction(async (tx)=> {
+    await db.$transaction(async (tx: any)=> {
         await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId"=${Number(from)} FOR UPDATE`;
         const fromBalance = await tx.balance.findUnique({
             where: {userId: Number(from)}
