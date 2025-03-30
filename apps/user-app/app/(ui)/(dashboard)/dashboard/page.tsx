@@ -82,7 +82,7 @@ const Dashboard = async () => {
   let p2pTransactions = await getP2PTransactions();
   let userTransactions = transactions
     ? [...transactions?.receivedTransfers, ...transactions?.sentTransfers]?.map(
-        (txn) => {
+        (txn: any) => {
           return {
             amount: txn.amount,
             time: txn.timestamp,
@@ -146,7 +146,7 @@ const Dashboard = async () => {
                 No Recent transactions
             </div>) : (
               <div className="pt-2">
-              {p2pTransactions.map(t => <div key={`${t.timestamp}`} className="flex justify-between">
+              {p2pTransactions.map((t:any) => <div key={`${t.timestamp}`} className="flex justify-between">
                       <div>
                           <div className="text-sm">
                               Sent INR to {t.ToUser?.number}

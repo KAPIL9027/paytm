@@ -23,7 +23,7 @@ const Transactions = async () => {
   let transactions = await getTransfers();
   let userTransactions = transactions
     ? [...transactions?.receivedTransfers, ...transactions?.sentTransfers]?.map(
-        (txn) => {
+        (txn:any) => {
           return {
             amount: txn.amount,
             time: txn.timestamp,
@@ -34,7 +34,7 @@ const Transactions = async () => {
       )
     : [];
   let onRampTransactions =
-    transactions?.OnRampTransaction.map((txn) => {
+    transactions?.OnRampTransaction.map((txn:any) => {
       return {
         amount: txn.amount,
         time: txn.startTime,

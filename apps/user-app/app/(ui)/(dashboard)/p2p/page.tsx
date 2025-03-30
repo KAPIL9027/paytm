@@ -33,7 +33,7 @@ const P2PTransfer = async () => {
       </div>
       <div className="p-4">
         <OnRampTransaction
-          transactions={transfersArray?.map((tx) => {
+          transactions={transfersArray?.map((tx: any) => {
             return {
               time: tx.timestamp,
               amount: tx.amount,
