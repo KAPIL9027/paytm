@@ -20,6 +20,6 @@ const ThemeImage = (props: Props) => {
 
 export default function Home() {
   return (
-    <div>Merchant App</div>
+    <div>Merchant App5</div>
   );
 }
