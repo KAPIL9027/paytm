@@ -1,6 +1,6 @@
+import localFont from "next/font/local";
 import Providers from "../../components/providers";
 import ".././globals.css";
-import localFont from 'next/font/local'
 
 const poppins = localFont({
   src: [
