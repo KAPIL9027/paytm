@@ -7,25 +7,36 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to Docker Hub
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push user-app Docker image
-        run: |
-          docker build -t kapilvashisht/paytm:latest -f ./docker/Dockerfile.user .
-          docker push kapilvashisht/paytm:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile.user
+          push: true
+          tags: kapilvashisht/paytm:latest
 
       - name: Build and Push bank-webhook-server Docker image
-        run: |
-          docker build -t kapilvashisht/paytm-bankserver:latest -f ./docker/Dockerfile.bank .
-          docker push kapilvashisht/paytm-bankserver:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile.bank
+          push: true
+          tags: kapilvashisht/paytm-bankserver:latest
 
       - name: Verify Pushed Images
         run: |
