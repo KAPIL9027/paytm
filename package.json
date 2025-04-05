@@ -4,15 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
-    "user-build": "turbo run build --filter=apps/user-app",
-    "bank-webhook-build": "turbo run build --filter=apps/bank_webhook_handler",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types",
-    "prisma": "cd packages/db && npx prisma generate && cd ../..",
-    "start-user-app": "cd ./apps/user-app && npm run start",
-    "start-bank-webhook": "cd ./apps/bank_webhook_handler && npm run dev"
+    "check-types": "turbo run check-types"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
@@ -247,6 +242,7 @@
     "keyv": "^4.5.4",
     "levn": "^0.4.1",
     "lightningcss": "^1.29.1",
+    "lightningcss-win32-x64-msvc": "^1.29.1",
     "locate-path": "^6.0.0",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
