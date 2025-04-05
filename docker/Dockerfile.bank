@@ -17,6 +17,6 @@ RUN npm install
 
 RUN npm run prisma
 
-RUN npm run user-build
+RUN npm run bank-webhook-build
 
-CMD ["npm", "run","start-user-app"]
+CMD ["npm", "run","start-bank-webhook"]
