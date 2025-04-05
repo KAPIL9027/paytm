@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest  # ✅ changed from windows-latest
 
     steps:
       - name: Check Out Repo
