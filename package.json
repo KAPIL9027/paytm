@@ -5,6 +5,10 @@
   "scripts": {
     "build": "turbo run build",
     "prisma": "cd ./packages/db && npx prisma generate",
+    "bank-webhook-build": "turbo run build --filter=apps/bank_webhook_handler",
+    "user-build": "turbo run build --filter=apps/user-app",
+    "start-bank-webhook": "turbo run dev --filter=apps/bank_webhook_handler",
+    "start-user-app": "turbo run dev --filter=apps/user-app",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
