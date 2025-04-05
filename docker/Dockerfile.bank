@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 COPY package.json package-lock.json turbo.json ./
 
-COPY apps/bank_webhook_handler ./apps/bank_webhook_handler
+COPY apps ./apps
 COPY packages ./packages
 
 # Install dependencies
