@@ -19,15 +19,9 @@ jobs:
 
       - name: Build and Push user-app Docker image
         run: |
-          docker build -f ./docker/Dockerfile.user -t kapilvashisht/paytm:latest .
+          docker build -f ./Dockerfile -t kapilvashisht/paytm:latest .
           docker push kapilvashisht/paytm:latest
 
-      - name: Build and Push bank-webhook-server Docker image
-        run: |
-          docker build -f ./docker/Dockerfile.bank -t kapilvashisht/paytm-bankserver:latest .
-          docker push kapilvashisht/paytm-bankserver:latest
-
       - name: Verify Pushed Images
-        run: |
+        run:
           docker pull kapilvashisht/paytm:latest
-          docker pull kapilvashisht/paytm-bankserver:latest
