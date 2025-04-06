@@ -8,7 +8,7 @@
     "bank-webhook-build": "cd ./apps/bank_webhook_handler && npm run build",
     "user-build": "cd ./apps/user-app && npm run build",
     "start-bank-webhook": "cd ./apps/bank_webhook_handler && npm run dev",
-    "start-user-app": "cd ./apps/user-app && npm run dev",
+    "start-user-app": "cd ./apps/user-app && npm run start",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
