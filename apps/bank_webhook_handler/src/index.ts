@@ -6,21 +6,19 @@ import db from '@repo/db/client';
 const app = express();
 app.use(express.json());
 
-app.post('/hdfcWebhook', async (req,res)=> {
+app.post('/hdfcWebhook', async (req:any,res:any)=> {
     const paymentInformation: hdfcWebhookPaymentType= {
         token: req.body?.token,
         userId: req.body?.user_identifier,
         amount: req.body?.amount,
         secret: req.body?.secret
     }
-    console.log(paymentInformation);
     const {success} = hdfcWebhookPaymentInput.safeParse(paymentInformation);
     if(!success){
         return res.status(401).json({
             message: "Incorrect information provided!"
         })
     }
-    console.log(process.env.SECRET);
     if(paymentInformation.secret !== process.env.SECRET){
         return res.status(403).json({
             message: "Not Authorized!"
