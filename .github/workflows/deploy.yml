@@ -19,7 +19,7 @@ jobs:
 
       - name: Build and Push user-app Docker image
         run: |
-          docker build --isolation=process -f ./docker/Dockerfile.user -t kapilvashisht/paytm:latest .
+          docker build -f ./docker/Dockerfile.user -t kapilvashisht/paytm:latest .
           docker push kapilvashisht/paytm:latest
 
       - name: Build and Push bank-webhook-server Docker image
