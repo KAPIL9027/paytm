@@ -1,8 +1,4 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
-
-# Install Node.js manually (v20 here)
-ADD https://nodejs.org/dist/v20.12.0/node-v20.12.0-x64.msi node.msi
-RUN start /wait msiexec /i node.msi /quiet && del node.msi
+FROM node:latest
 
 
 WORKDIR /usr/src/app
