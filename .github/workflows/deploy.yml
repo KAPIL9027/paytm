@@ -3,10 +3,10 @@ name: Build and Deploy to Docker Hub
 on:
   push:
     branches:
-      - main  # Adjusted to trigger on pushes to master
+      - main
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Check Out Repo
@@ -25,6 +25,7 @@ jobs:
         file: ./docker/Dockerfile.user
         push: true
         tags: kapilvashisht/frontend:latest
+
     - name: Build and Push backend Docker image
       uses: docker/build-push-action@v2
       with:
@@ -33,7 +34,35 @@ jobs:
         push: true
         tags: kapilvashisht/backend:latest
 
-    - name: Verify Pushed Image
+    - name: Verify Pushed Frontend Image
       run: docker pull kapilvashisht/frontend:latest
+
     - name: Verify Pushed Backend Image
       run: docker pull kapilvashisht/backend:latest
+
+    - name: Deploy to Azure VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker pull kapilvashisht/frontend:latest
+          docker pull kapilvashisht/backend:latest
+
+          docker stop frontend || true
+          docker rm frontend || true
+          docker stop backend || true
+          docker rm backend || true
+
+          docker run -d --name frontend -p 3000:3000 \
+            -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+            -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+            -e WEBHOOK_SECRET="${{ secrets.WEBHOOK_SECRET }}" \
+            -e NEXT_AUTH_URL="${{ secrets.NEXT_AUTH_URL }}" \
+            kapilvashisht/frontend:latest
+
+          docker run -d --name backend -p 3003:3003 \
+            -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+            -e SECRET="${{ secrets.SECRET }}" \
+            kapilvashisht/backend:latest
