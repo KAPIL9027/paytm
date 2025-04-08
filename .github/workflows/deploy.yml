@@ -43,9 +43,9 @@ jobs:
     - name: Deploy to Azure VM
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
+        host: ${{ secrets.AZURE_SSH_HOST }}
+        username: ${{ secrets.AZURE_SSH_USERNAME }}
+        key: ${{ secrets.AZURE_SSH_KEY }}
         script: |
           docker pull kapilvashisht/frontend:latest
           docker pull kapilvashisht/backend:latest
