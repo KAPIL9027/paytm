@@ -58,10 +58,10 @@ const AddMoneyCard = () => {
                         return;
                     }
                     await createOnRampTransaction(provider,value)
-                    await axios.post('http://localhost:3000/api/transaction',{
+                    await axios.post('/api/transaction',{
                         //@ts-ignore
                         user_identifier: session?.data?.user?.id,
-                        webhookUrl: 'http://localhost:3003/hdfcWebhook',
+                        webhookUrl: process.env.WEBHOOK_URL ?? 'http://localhost:3003/hdfcWebhook',
                         amount: `${value}`
                     })
                     window.location.href = redirectUrl || "";
