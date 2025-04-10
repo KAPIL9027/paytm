@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 export const POST = async (request: Request)=>{
     const data = await request.json();
     const {success} = paymentData.safeParse(data);
+    console.log(data)
     if(!success){
         return NextResponse.json({
             message: "Incorrect data provided!"
@@ -14,7 +15,7 @@ export const POST = async (request: Request)=>{
         })
     }
     const token = jwt.sign(data,process.env.JWT_SECRET!);
-    const response: { message: string} = await axios.post(process.env.WEBHOOK_URL ?? 'http://localhost:3003/hdfcWebhook',{
+    const response: { message: string} = await axios.post(process.env.NEXT_PUBLIC_WEBHOOK_URL!,{
         user_identifier: data.user_identifier,
        amount: data.amount,
        token,
