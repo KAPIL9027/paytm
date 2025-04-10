@@ -59,8 +59,8 @@ jobs:
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
               -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
               -e WEBHOOK_SECRET="${{ secrets.WEBHOOK_SECRET }}" \
-              -e NEXT_AUTH_URL="${{ secrets.NEXT_AUTH_URL }}" \
-              -e WEBHOOK_URL="${{ secrets.WEBHOOK_URL }}" \
+              -e NEXTAUTH_URL="${{ secrets.NEXT_AUTH_URL }}" \
+              -e NEXT_PUBLIC_WEBHOOK_URL="${{ secrets.WEBHOOK_URL }}" \
               kapilvashisht/frontend:latest
 
             sudo docker run -d --name backend -p 3003:3003 \

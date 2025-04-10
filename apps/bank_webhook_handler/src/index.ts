@@ -13,6 +13,7 @@ app.post('/hdfcWebhook', async (req:any,res:any)=> {
         amount: req.body?.amount,
         secret: req.body?.secret
     }
+    console.log(req);
     const {success} = hdfcWebhookPaymentInput.safeParse(paymentInformation);
     if(!success){
         return res.status(401).json({
@@ -63,4 +64,6 @@ app.post('/hdfcWebhook', async (req:any,res:any)=> {
 
 })
 
-app.listen(3003);
+app.listen('3003',()=>{
+    console.log('started at port 3003');
+});
