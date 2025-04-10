@@ -71,6 +71,7 @@ const AddMoneyCard = () => {
         <div className="flex justify-center pt-4">
           <Button
             onClick={async () => {
+                console.log('env',process.env.NEXT_PUBLIC_WEBHOOK_URL);
               if (value <= 0) {
                 setType("error");
                 SetMsg("Amount cannot lesser or equal to zero.");
