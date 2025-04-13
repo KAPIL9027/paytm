@@ -45,7 +45,7 @@ const Transactions = async () => {
   let overallTransactions = [...userTransactions, ...onRampTransactions];
   return (
     <Center>
-      <div className="w-full sm:w-2xl p-4">
+      <div className="w-full lg:w-2xl p-4">
         <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
           Successful Transactions
         </div>
