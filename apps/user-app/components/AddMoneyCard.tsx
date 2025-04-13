@@ -36,11 +36,12 @@ const AddMoneyCard = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const navType = (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type;
-    if (navType === 'back_forward') {
+    const redirected = sessionStorage.getItem('redirectToBank');
+    if (redirected === "true" && navType === 'back_forward') {
       setType("success");
                 SetMsg("Added Money Successfully!");
                 dispatch(setOpenToast(true));
-                return;
+                sessionStorage.setItem('redirectToBank',"false");
     }
   }, [])
   return (
@@ -95,6 +96,7 @@ const AddMoneyCard = () => {
                 amount: `${value}`,
               });
               window.location.href = redirectUrl || "";
+              sessionStorage.setItem("redirectToBank","true");
               }
               catch(e){
                 setType("error");

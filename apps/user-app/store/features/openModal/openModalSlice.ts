@@ -13,7 +13,6 @@ export const openModalSlice = createSlice({
     initialState,
     reducers: {
         setValue: (state,action: PayloadAction<boolean>)=> {
-            console.log('hit')
             state.value = action.payload
         }
     }
