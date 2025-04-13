@@ -12,6 +12,9 @@ RUN npm install
 # Can you add a script to the global package.json that does this?
 RUN cd packages/db && npx prisma generate && cd ../..
 
+ARG NEXT_PUBLIC_WEBHOOK_URL
+ENV NEXT_PUBLIC_WEBHOOK_URL=$NEXT_PUBLIC_WEBHOOK_URL
+
 # Can you filter the build down to just one app?
 RUN npm run user-build
 

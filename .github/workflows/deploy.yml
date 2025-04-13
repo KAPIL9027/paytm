@@ -25,6 +25,8 @@ jobs:
           file: ./docker/Dockerfile.user
           push: true
           tags: kapilvashisht/frontend:latest
+          build-args: |
+            NEXT_PUBLIC_WEBHOOK_URL=${{secrets.NEXT_PUBLIC_WEBHOOK_URL}}
 
       - name: Build and Push backend Docker image
         uses: docker/build-push-action@v2
