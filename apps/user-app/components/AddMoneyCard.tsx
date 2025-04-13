@@ -2,7 +2,7 @@
 import { Button } from "@repo/ui/button";
 import { Card } from "@repo/ui/card";
 import Select from "@repo/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "@repo/ui/textinput";
 import { createOnRampTransaction } from "../lib/actions/createOnrampTransactions";
 import axios from "axios";
@@ -34,6 +34,15 @@ const AddMoneyCard = () => {
   const openToast = useSelector((state: RootState) => state.openToast.value);
   const [msg, SetMsg] = useState("");
   const dispatch = useDispatch();
+  useEffect(() => {
+    const navType = (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type;
+    if (navType === 'back_forward') {
+      setType("success");
+                SetMsg("Added Money Successfully!");
+                dispatch(setOpenToast(true));
+                return;
+    }
+  }, [])
   return (
     <Card title="Add Money">
       <div className="w-full">
@@ -71,14 +80,14 @@ const AddMoneyCard = () => {
         <div className="flex justify-center pt-4">
           <Button
             onClick={async () => {
-                console.log('env',process.env.NEXT_PUBLIC_WEBHOOK_URL);
               if (value <= 0) {
                 setType("error");
                 SetMsg("Amount cannot lesser or equal to zero.");
                 dispatch(setOpenToast(true));
                 return;
               }
-              await createOnRampTransaction(provider, value);
+              try {
+                await createOnRampTransaction(provider, value);
               await axios.post("/api/transaction", {
                 //@ts-ignore
                 user_identifier: session?.data?.user?.id,
@@ -86,6 +95,14 @@ const AddMoneyCard = () => {
                 amount: `${value}`,
               });
               window.location.href = redirectUrl || "";
+              }
+              catch(e){
+                setType("error");
+                SetMsg("Something went wrong! Try again later after some time.");
+                dispatch(setOpenToast(true));
+                return;
+              }
+              
             }}
           >
             Add Money

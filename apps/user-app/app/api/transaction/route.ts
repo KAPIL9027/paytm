@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken';
 export const POST = async (request: Request)=>{
     const data = await request.json();
     const {success} = paymentData.safeParse(data);
-    console.log('data',data)
     if(!success){
         return NextResponse.json({
             message: "Incorrect data provided!"
